@@ -1,0 +1,10 @@
+[package]
+name = "advent2020"
+version = "0.1.0"
+authors = ["Maxim Baz"]
+edition = "2018"
+
+[dependencies]
+num-traits = "0.2"
+num-derive = "0.3"
+itertools = "0.9.0"
