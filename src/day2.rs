@@ -51,7 +51,7 @@ fn part2(input: &Vec<PasswordWithPolicy>) -> usize {
         .filter(|p| {
             let first = p.password.chars().nth(p.from - 1) == Some(p.letter);
             let second = p.password.chars().nth(p.to - 1) == Some(p.letter);
-            (first || second) && !(first && second)
+            first != second
         })
         .count()
 }
