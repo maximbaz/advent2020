@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate lazy_static;
+
 use std::env;
 use std::process;
 
@@ -7,6 +10,7 @@ use config::*;
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 fn exit_with_error(msg: &str) -> ! {
     println!("{}", msg);
@@ -23,12 +27,14 @@ fn main() {
             Day::Day1 => println!("Solution: {}", day1::run_part1()),
             Day::Day2 => println!("Solution: {}", day2::run_part1()),
             Day::Day3 => println!("Solution: {}", day3::run_part1()),
+            Day::Day4 => println!("Solution: {}", day4::run_part1()),
             _ => exit_with_error("This day is not solved yet!"),
         },
         Part::Two => match config.day {
             Day::Day1 => println!("Solution: {}", day1::run_part2()),
             Day::Day2 => println!("Solution: {}", day2::run_part2()),
             Day::Day3 => println!("Solution: {}", day3::run_part2()),
+            Day::Day4 => println!("Solution: {}", day4::run_part2()),
             _ => exit_with_error("This day is not solved yet!"),
         },
     };
