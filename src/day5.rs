@@ -19,19 +19,14 @@ fn input<'a>(string: &'a str) -> Vec<usize> {
 }
 
 fn to_id(s: &str) -> usize {
-    binary_search(&s[..7]) * 8 + binary_search(&s[7..])
-}
-
-fn binary_search(s: &str) -> usize {
-    s.chars()
-        .fold((0, (1 << s.len()) - 1), |(l, r), dir| {
-            if dir == 'F' || dir == 'L' {
-                (l, (l + r) / 2)
-            } else {
-                ((l + r) / 2 + 1, r)
-            }
-        })
-        .0
+    usize::from_str_radix(
+        &s.replace("F", "0")
+            .replace("L", "0")
+            .replace("B", "1")
+            .replace("R", "1"),
+        2,
+    )
+    .unwrap()
 }
 
 fn part1(input: &[usize]) -> usize {
