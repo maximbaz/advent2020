@@ -13,6 +13,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 fn exit_with_error(msg: &str) -> ! {
     println!("{}", msg);
@@ -32,6 +33,7 @@ fn main() {
             Day::Day4 => println!("Solution: {}", day4::run_part1()),
             Day::Day5 => println!("Solution: {}", day5::run_part1()),
             Day::Day6 => println!("Solution: {}", day6::run_part1()),
+            Day::Day7 => println!("Solution: {}", day7::run_part1()),
             _ => exit_with_error("This day is not solved yet!"),
         },
         Part::Two => match config.day {
@@ -41,6 +43,7 @@ fn main() {
             Day::Day4 => println!("Solution: {}", day4::run_part2()),
             Day::Day5 => println!("Solution: {}", day5::run_part2()),
             Day::Day6 => println!("Solution: {}", day6::run_part2()),
+            Day::Day7 => println!("Solution: {}", day7::run_part2()),
             _ => exit_with_error("This day is not solved yet!"),
         },
     };
