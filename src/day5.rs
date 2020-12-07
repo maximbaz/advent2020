@@ -36,12 +36,11 @@ fn part1(input: &[usize]) -> usize {
 fn part2(input: &[usize]) -> usize {
     let given = input.iter().cloned().collect::<HashSet<usize>>();
 
-    iproduct!(1..127, 0..=7)
+    *iproduct!(1..127, 0..=7)
         .map(|(row, col)| row * 8 + col)
         .collect::<HashSet<usize>>()
         .difference(&given)
-        .cloned()
-        .filter(|v| given.contains(&(v - 1)) && given.contains(&(v + 1)))
+        .filter(|&v| given.contains(&(v - 1)) && given.contains(&(v + 1)))
         .next()
         .unwrap()
 }

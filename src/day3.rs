@@ -29,8 +29,7 @@ fn part1(input: &Map) -> usize {
 fn part2(input: &Map) -> usize {
     vec![(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
         .iter()
-        .cloned()
-        .map(|(right, down)| solve(input, right, down))
+        .map(|(right, down)| solve(input, *right, *down))
         .product()
 }
 
