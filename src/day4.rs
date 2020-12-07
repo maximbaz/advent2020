@@ -92,8 +92,8 @@ impl Passport {
         }
 
         lazy_static! {
-            static ref HCL: Regex = Regex::new(r"^#[0-9a-f]{6}$").unwrap();
-            static ref PID: Regex = Regex::new(r"^\d{9}$").unwrap();
+            static ref HCL: Regex = Regex::new(r"^#[0-9a-f]{6}$").expect("invalid regex");
+            static ref PID: Regex = Regex::new(r"^\d{9}$").expect("invalid regex");
         }
 
         match &self.hair_color {

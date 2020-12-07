@@ -16,22 +16,24 @@ fn read_file() -> String {
 struct PasswordWithPolicy<'a> {
     password: &'a str,
     letter: char,
-    from: usize,
-    to: usize,
+    min: usize,
+    max: usize,
 }
 
 fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
-    let re = Regex::new(r"(\d+)-(\d+) (.): (.+)").unwrap();
+    lazy_static! {
+        static ref RE: Regex = Regex::new(r"(\d+)-(\d+) (.): (.+)").expect("invalid regex");
+    }
 
     string
         .trim()
         .lines()
         .map(|line| {
-            let caps = re.captures(line).unwrap();
+            let caps = RE.captures(line).expect("invalid entry format");
             PasswordWithPolicy {
-                from: caps.get(1).unwrap().as_str().parse().unwrap(),
-                to: caps.get(2).unwrap().as_str().parse().unwrap(),
-                letter: caps.get(3).unwrap().as_str().chars().next().unwrap(),
+                min: caps[1].parse().expect("min value is not a number"),
+                max: caps[2].parse().expect("max value is not a number"),
+                letter: caps[3].parse().expect("letter is not one char"),
                 password: caps.get(4).unwrap().as_str(),
             }
         })
@@ -41,7 +43,7 @@ fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
 fn part1(input: &Vec<PasswordWithPolicy>) -> usize {
     input
         .iter()
-        .filter(|p| (p.from..(p.to + 1)).contains(&p.password.matches(p.letter).count()))
+        .filter(|p| (p.min..(p.max + 1)).contains(&p.password.matches(p.letter).count()))
         .count()
 }
 
@@ -49,8 +51,8 @@ fn part2(input: &Vec<PasswordWithPolicy>) -> usize {
     input
         .iter()
         .filter(|p| {
-            let first = p.password.chars().nth(p.from - 1) == Some(p.letter);
-            let second = p.password.chars().nth(p.to - 1) == Some(p.letter);
+            let first = p.password.chars().nth(p.min - 1) == Some(p.letter);
+            let second = p.password.chars().nth(p.max - 1) == Some(p.letter);
             first != second
         })
         .count()

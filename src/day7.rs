@@ -14,49 +14,52 @@ fn read_file() -> String {
     fs::read_to_string("input/day7.txt").expect("Error reading the file")
 }
 
-fn input<'a>(string: &'a str) -> HashMap<&str, HashMap<&str, usize>> {
+type BagsInside<'a> = HashMap<&'a str, usize>;
+type Bags<'a> = HashMap<&'a str, BagsInside<'a>>;
+
+fn input<'a>(string: &'a str) -> Bags {
     string.trim().lines().map(parse).collect()
 }
 
-fn parse(s: &str) -> (&str, HashMap<&str, usize>) {
+fn parse(s: &str) -> (&str, BagsInside) {
     lazy_static! {
-        static ref RE_BAG: Regex = Regex::new(r"^\w+ \w+").unwrap();
-        static ref RE_CONTENTS: Regex = Regex::new(r"(\d+) (\w+ \w+) bags?[,.]").unwrap();
+        static ref RE_BAG: Regex = Regex::new(r"^\w+ \w+").expect("invalid regex");
+        static ref RE_CONTENTS: Regex = Regex::new(r"(\d+) (\w+ \w+) bag").expect("invalid regex");
     }
 
     (
-        RE_BAG.find(s).unwrap().as_str(),
+        RE_BAG.find(s).expect("invalid bag").as_str(),
         RE_CONTENTS
             .captures_iter(s)
             .map(|cap| {
                 (
                     cap.get(2).unwrap().as_str(),
-                    cap.get(1).unwrap().as_str().parse().unwrap(),
+                    cap[1].parse().expect("bag count is not a number"),
                 )
             })
             .collect(),
     )
 }
 
-fn check(input: &HashMap<&str, HashMap<&str, usize>>, key: &str) -> bool {
+fn check(input: &Bags, key: &str) -> bool {
     input
         .get(key)
         .map(|bag| bag.keys().any(|k| *k == "shiny gold" || check(input, k)))
         .unwrap_or_default()
 }
 
-fn count(input: &HashMap<&str, HashMap<&str, usize>>, key: &str) -> usize {
+fn count(input: &Bags, key: &str) -> usize {
     input
         .get(key)
         .map(|bag| bag.iter().fold(1, |sum, (k, n)| sum + n * count(input, k)))
         .unwrap_or(1)
 }
 
-fn part1(input: &HashMap<&str, HashMap<&str, usize>>) -> usize {
+fn part1(input: &Bags) -> usize {
     input.keys().filter(|k| check(input, k)).count()
 }
 
-fn part2(input: &HashMap<&str, HashMap<&str, usize>>) -> usize {
+fn part2(input: &Bags) -> usize {
     count(input, "shiny gold") - 1
 }
 
