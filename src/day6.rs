@@ -21,21 +21,21 @@ fn input<'a>(string: &'a str) -> Vec<Vec<HashSet<char>>> {
         .collect()
 }
 
-fn part1(input: &Vec<Vec<HashSet<char>>>) -> usize {
+fn part1(input: &[Vec<HashSet<char>>]) -> usize {
     input.iter().map(|sets| union_all(sets).len()).sum()
 }
 
-fn part2(input: &Vec<Vec<HashSet<char>>>) -> usize {
+fn part2(input: &[Vec<HashSet<char>>]) -> usize {
     input.iter().map(|sets| intersection_all(sets).len()).sum()
 }
 
-fn union_all(sets: &Vec<HashSet<char>>) -> HashSet<char> {
+fn union_all(sets: &[HashSet<char>]) -> HashSet<char> {
     sets.iter().fold(HashSet::new(), |result, set| {
         result.union(set).cloned().collect()
     })
 }
 
-fn intersection_all(sets: &Vec<HashSet<char>>) -> HashSet<char> {
+fn intersection_all(sets: &[HashSet<char>]) -> HashSet<char> {
     sets.iter().fold(sets[0].clone(), |result, set| {
         result.intersection(set).cloned().collect()
     })

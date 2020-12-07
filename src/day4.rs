@@ -140,11 +140,11 @@ fn input<'a>(string: &'a str) -> Vec<Passport> {
         .collect()
 }
 
-fn part1(input: &Vec<Passport>) -> usize {
+fn part1(input: &[Passport]) -> usize {
     input.iter().filter(|p| p.has_all_fields()).count()
 }
 
-fn part2(input: &Vec<Passport>) -> usize {
+fn part2(input: &[Passport]) -> usize {
     input.iter().filter(|p| p.is_valid()).count()
 }
 

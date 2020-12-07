@@ -40,14 +40,14 @@ fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
         .collect()
 }
 
-fn part1(input: &Vec<PasswordWithPolicy>) -> usize {
+fn part1(input: &[PasswordWithPolicy]) -> usize {
     input
         .iter()
         .filter(|p| (p.min..(p.max + 1)).contains(&p.password.matches(p.letter).count()))
         .count()
 }
 
-fn part2(input: &Vec<PasswordWithPolicy>) -> usize {
+fn part2(input: &[PasswordWithPolicy]) -> usize {
     input
         .iter()
         .filter(|p| {
