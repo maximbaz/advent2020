@@ -34,7 +34,7 @@ fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
                 min: caps[1].parse().expect("min value is not a number"),
                 max: caps[2].parse().expect("max value is not a number"),
                 letter: caps[3].parse().expect("letter is not one char"),
-                password: caps.get(4).unwrap().as_str(),
+                password: caps.get(4).expect("password is missing").as_str(),
             }
         })
         .collect()

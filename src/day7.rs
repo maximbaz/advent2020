@@ -33,7 +33,7 @@ fn parse(s: &str) -> (&str, BagsInside) {
             .captures_iter(s)
             .map(|cap| {
                 (
-                    cap.get(2).unwrap().as_str(),
+                    cap.get(2).expect("invalid bag contents").as_str(),
                     cap[1].parse().expect("bag count is not a number"),
                 )
             })

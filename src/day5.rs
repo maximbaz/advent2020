@@ -26,11 +26,11 @@ fn to_id(s: &str) -> usize {
             .replace("R", "1"),
         2,
     )
-    .unwrap()
+    .expect("invalid seat string")
 }
 
 fn part1(input: &[usize]) -> usize {
-    *input.iter().max().unwrap()
+    *input.iter().max().unwrap_or(&0)
 }
 
 fn part2(input: &[usize]) -> usize {
@@ -42,7 +42,7 @@ fn part2(input: &[usize]) -> usize {
         .difference(&given)
         .filter(|&v| given.contains(&(v - 1)) && given.contains(&(v + 1)))
         .next()
-        .unwrap()
+        .unwrap_or(&0)
 }
 
 #[cfg(test)]

@@ -136,7 +136,7 @@ fn input<'a>(string: &'a str) -> Vec<Passport> {
     string
         .trim()
         .split("\n\n")
-        .map(|s| s.replace(" ", "\n").trim().parse().unwrap())
+        .map(|s| s.replace(" ", "\n").trim().parse().expect("invalid input"))
         .collect()
 }
 
