@@ -13,12 +13,8 @@ fn read_file() -> String {
     fs::read_to_string("input/day9.txt").expect("Error reading the file")
 }
 
-fn input<'a>(string: &'a str) -> Vec<i64> {
-    string
-        .trim()
-        .lines()
-        .map(|v| v.parse().expect("invalid number"))
-        .collect()
+fn input(string: &str) -> Vec<i64> {
+    string.trim().lines().flat_map(str::parse).collect()
 }
 
 fn part1(input: &[i64], preamble: usize) -> i64 {

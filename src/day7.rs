@@ -17,7 +17,7 @@ fn read_file() -> String {
 type BagsInside<'a> = HashMap<&'a str, usize>;
 type Bags<'a> = HashMap<&'a str, BagsInside<'a>>;
 
-fn input<'a>(string: &'a str) -> Bags {
+fn input(string: &str) -> Bags {
     string.trim().lines().map(parse).collect()
 }
 

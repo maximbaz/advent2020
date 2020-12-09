@@ -14,7 +14,7 @@ fn read_file() -> String {
     fs::read_to_string("input/day5.txt").expect("Error reading the file")
 }
 
-fn input<'a>(string: &'a str) -> Vec<usize> {
+fn input(string: &str) -> Vec<usize> {
     string.trim().lines().map(to_id).collect()
 }
 

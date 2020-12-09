@@ -20,7 +20,7 @@ struct PasswordWithPolicy<'a> {
     max: usize,
 }
 
-fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
+fn input(string: &str) -> Vec<PasswordWithPolicy> {
     lazy_static! {
         static ref RE: Regex = Regex::new(r"(\d+)-(\d+) (.): (.+)").expect("invalid regex");
     }
@@ -43,7 +43,7 @@ fn input<'a>(string: &'a str) -> Vec<PasswordWithPolicy> {
 fn part1(input: &[PasswordWithPolicy]) -> usize {
     input
         .iter()
-        .filter(|p| (p.min..(p.max + 1)).contains(&p.password.matches(p.letter).count()))
+        .filter(|p| (p.min..=p.max).contains(&p.password.matches(p.letter).count()))
         .count()
 }
 

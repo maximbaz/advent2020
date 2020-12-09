@@ -13,7 +13,7 @@ fn read_file() -> String {
     fs::read_to_string("input/day6.txt").expect("Error reading the file")
 }
 
-fn input<'a>(string: &'a str) -> Vec<Vec<HashSet<char>>> {
+fn input(string: &str) -> Vec<Vec<HashSet<char>>> {
     string
         .trim()
         .split("\n\n")

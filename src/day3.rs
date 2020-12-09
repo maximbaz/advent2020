@@ -14,7 +14,7 @@ fn read_file() -> String {
 
 type Map = Vec<Vec<bool>>;
 
-fn input<'a>(string: &'a str) -> Map {
+fn input(string: &str) -> Map {
     string
         .trim()
         .lines()

@@ -133,7 +133,7 @@ impl FromStr for Passport {
     }
 }
 
-fn input<'a>(string: &'a str) -> Vec<Passport> {
+fn input(string: &str) -> Vec<Passport> {
     string
         .trim()
         .split("\n\n")
