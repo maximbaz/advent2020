@@ -30,7 +30,7 @@ fn to_id(s: &str) -> usize {
 }
 
 fn part1(input: &[usize]) -> usize {
-    *input.iter().max().unwrap_or(&0)
+    *input.iter().max().expect("no solution found")
 }
 
 fn part2(input: &[usize]) -> usize {
@@ -40,9 +40,8 @@ fn part2(input: &[usize]) -> usize {
         .map(|(row, col)| row * 8 + col)
         .collect::<HashSet<usize>>()
         .difference(&given)
-        .filter(|&v| given.contains(&(v - 1)) && given.contains(&(v + 1)))
-        .next()
-        .unwrap_or(&0)
+        .find(|&v| given.contains(&(v - 1)) && given.contains(&(v + 1)))
+        .expect("no solution found")
 }
 
 #[cfg(test)]
