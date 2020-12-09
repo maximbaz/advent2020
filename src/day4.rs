@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use regex::Regex;
 use std::collections::HashMap;
 use std::fs;
@@ -116,7 +117,7 @@ impl FromStr for Passport {
     fn from_str(s: &str) -> Result<Passport, ()> {
         let fields: HashMap<&str, &str> = s
             .lines()
-            .map(|kv| kv.split(':').collect::<Vec<_>>())
+            .map(|kv| kv.split(':').collect_vec())
             .map(|vec| (vec[0], vec[1]))
             .collect();
 

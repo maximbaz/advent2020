@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::collections::HashSet;
 use std::fs;
 
@@ -20,7 +21,7 @@ fn input(string: &str) -> Vec<Op> {
         .trim()
         .lines()
         .map(|s| {
-            let p = s.split(' ').collect::<Vec<_>>();
+            let p = s.split(' ').collect_vec();
             (p[0], p[1].parse().expect("value is not a number"))
         })
         .collect()

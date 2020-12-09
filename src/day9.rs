@@ -27,8 +27,8 @@ fn part1(input: &[i64], preamble: usize) -> i64 {
         .find(|w| {
             !w[..preamble]
                 .iter()
-                .combinations(2)
-                .any(|p| p[0] + p[1] == w[preamble])
+                .tuple_combinations()
+                .any(|(a, b)| a + b == w[preamble])
         })
         .map(|w| w[preamble])
         .expect("no solution found")
@@ -40,7 +40,7 @@ fn part2(input: &[i64], preamble: usize) -> i64 {
     (2..input.len())
         .flat_map(|n| input.windows(n).find(|w| w.iter().sum::<i64>() == wrong))
         .next()
-        .map(|w| w.iter().min().unwrap() + w.iter().max().unwrap())
+        .map(|w| w.iter().minmax().into_option().map(|(a, b)| a + b).unwrap())
         .expect("no solution found")
 }
 

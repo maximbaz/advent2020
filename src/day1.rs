@@ -31,9 +31,9 @@ fn solve(input: &[i32], num_comb: usize) -> i32 {
         .iter()
         .cloned()
         .combinations(num_comb)
-        .filter(|comb| comb.iter().sum::<i32>() == 2020)
-        .take(1)
-        .fold(0, |_, comb| comb.iter().product())
+        .find(|comb| comb.iter().sum::<i32>() == 2020)
+        .map(|comb| comb.iter().product())
+        .expect("no solution found")
 }
 
 #[cfg(test)]
