@@ -1,25 +1,58 @@
+use super::super::*;
 use itertools::Itertools;
 use regex::Regex;
 use std::collections::HashMap;
-use std::fs;
 use std::str::FromStr;
 use strum_macros::EnumString;
 
-pub fn run_part1() -> usize {
-    part1(&input(&read_file()))
-}
+pub struct Task;
 
-pub fn run_part2() -> usize {
-    part2(&input(&read_file()))
-}
-
-fn read_file() -> String {
-    fs::read_to_string("input/day4.txt").expect("Error reading the file")
+#[derive(EnumString)]
+#[strum(serialize_all = "snake_case")]
+enum EyeColor {
+    Amb,
+    Blu,
+    Brn,
+    Gry,
+    Grn,
+    Hzl,
+    Oth,
 }
 
 enum Height {
     In(u16),
     Cm(u16),
+}
+
+pub struct Passport {
+    birth_year: Option<u16>,
+    issue_year: Option<u16>,
+    expiry_year: Option<u16>,
+    height: Option<Height>,
+    hair_color: Option<String>,
+    eye_color: Option<EyeColor>,
+    passport_id: Option<String>,
+}
+
+impl Solution for Task {
+    type Input = Vec<Passport>;
+    type Output = usize;
+
+    fn parse_input(&self, input: String) -> Self::Input {
+        input
+            .trim()
+            .split("\n\n")
+            .map(|s| s.replace(" ", "\n").trim().parse().expect("invalid input"))
+            .collect()
+    }
+
+    fn part1(&self, input: &Self::Input) -> Self::Output {
+        input.iter().filter(|p| p.has_all_fields()).count()
+    }
+
+    fn part2(&self, input: &Self::Input) -> Self::Output {
+        input.iter().filter(|p| p.is_valid()).count()
+    }
 }
 
 impl FromStr for Height {
@@ -35,28 +68,6 @@ impl FromStr for Height {
                 _ => Err(()),
             })
     }
-}
-
-#[derive(EnumString)]
-#[strum(serialize_all = "snake_case")]
-enum EyeColor {
-    Amb,
-    Blu,
-    Brn,
-    Gry,
-    Grn,
-    Hzl,
-    Oth,
-}
-
-struct Passport {
-    birth_year: Option<u16>,
-    issue_year: Option<u16>,
-    expiry_year: Option<u16>,
-    height: Option<Height>,
-    hair_color: Option<String>,
-    eye_color: Option<EyeColor>,
-    passport_id: Option<String>,
 }
 
 impl Passport {
@@ -133,22 +144,6 @@ impl FromStr for Passport {
     }
 }
 
-fn input(string: &str) -> Vec<Passport> {
-    string
-        .trim()
-        .split("\n\n")
-        .map(|s| s.replace(" ", "\n").trim().parse().expect("invalid input"))
-        .collect()
-}
-
-fn part1(input: &[Passport]) -> usize {
-    input.iter().filter(|p| p.has_all_fields()).count()
-}
-
-fn part2(input: &[Passport]) -> usize {
-    input.iter().filter(|p| p.is_valid()).count()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -157,8 +152,9 @@ mod tests {
     fn test_part1() {
         assert_eq!(
             2,
-            part1(&input(
-                &"
+            Task.part1(
+                &Task.parse_input(
+                    "
 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
 
@@ -173,7 +169,9 @@ hgt:179cm
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in
             "
-            ))
+                    .to_string()
+                )
+            )
         );
     }
 
@@ -181,8 +179,9 @@ iyr:2011 ecl:brn hgt:59in
     fn test_part2() {
         assert_eq!(
             0,
-            part2(&input(
-                &"
+            Task.part2(
+                &Task.parse_input(
+                    "
 eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
 
@@ -197,12 +196,15 @@ hgt:59cm ecl:zzz
 eyr:2038 hcl:74454a iyr:2023
 pid:3556412378 byr:2007
             "
-            ))
+                    .to_string()
+                )
+            )
         );
         assert_eq!(
             4,
-            part2(&input(
-                &"
+            Task.part2(
+                &Task.parse_input(
+                    "
 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f
 
@@ -216,7 +218,9 @@ eyr:2022
 
 iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
             "
-            ))
+                    .to_string()
+                )
+            )
         );
     }
 }
