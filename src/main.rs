@@ -63,6 +63,7 @@ fn solve(year: u16, day: u8, part: u8) -> Option<(String, u128)> {
             7 => Some(measure(|| year2020::day07::Task.solve(year, day, part))),
             8 => Some(measure(|| year2020::day08::Task.solve(year, day, part))),
             9 => Some(measure(|| year2020::day09::Task.solve(year, day, part))),
+            10 => Some(measure(|| year2020::day10::Task.solve(year, day, part))),
             _ => None,
         },
         _ => None,
