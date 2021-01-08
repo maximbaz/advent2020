@@ -19,11 +19,12 @@ impl Solution for Task {
     }
 
     fn part1(&self, input: &Self::Input) -> Self::Output {
-        input
-            .1
+        let (depart, buses) = input;
+
+        buses
             .iter()
             .filter(|&&bus| bus != 0)
-            .map(|bus| (bus - input.0 % bus, bus))
+            .map(|bus| (bus - depart % bus, bus))
             .min()
             .map(|(wait, bus)| wait * bus)
             .unwrap()
