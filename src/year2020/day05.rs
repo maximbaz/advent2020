@@ -53,7 +53,7 @@ mod tests {
 BFFFBBFRRR
 FFFBBBFRRR
 BBFFBBFRLL
-            "
+                    "
                     .to_string()
                 )
             )

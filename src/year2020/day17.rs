@@ -80,7 +80,7 @@ mod tests {
 .#.
 ..#
 ###
-            "
+                    "
                     .to_string()
                 )
             )
@@ -97,7 +97,7 @@ mod tests {
 .#.
 ..#
 ###
-            "
+                    "
                     .to_string()
                 )
             )

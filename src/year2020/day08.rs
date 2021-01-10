@@ -83,7 +83,7 @@ acc -99
 acc +1
 jmp -4
 acc +6
-            "
+                    "
                     .to_string()
                 )
             )
@@ -106,7 +106,7 @@ acc -99
 acc +1
 jmp -4
 acc +6
-            "
+                    "
                     .to_string()
                 )
             )

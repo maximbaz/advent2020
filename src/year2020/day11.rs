@@ -115,7 +115,7 @@ LLLLLLLLLL
 L.LLLLLL.L
 L.LLLLL.LL
 
-            "
+                    "
                     .to_string()
                 )
             )
@@ -140,7 +140,7 @@ LLLLLLLLLL
 L.LLLLLL.L
 L.LLLLL.LL
 
-            "
+                    "
                     .to_string()
                 )
             )
