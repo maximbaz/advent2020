@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate lazy_static;
-
 use itertools::Itertools;
+use lazy_static::lazy_static;
 use std::env;
 use std::fmt::Display;
 use std::fs;
@@ -78,7 +76,7 @@ fn solve(year: u16, day: u8, part: u8) -> Option<(String, u128)> {
     }
 }
 
-fn measure<F: Fn() -> String>(f: F) -> (String, u128) {
+fn measure(f: impl Fn() -> String) -> (String, u128) {
     let now = Instant::now();
     (f(), now.elapsed().as_millis())
 }
