@@ -12,8 +12,8 @@ impl Solution for Task {
         input.trim().lines().flat_map(str::parse).collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
-        match prepare(input)
+    fn part1(&self, input: Self::Input) -> Self::Output {
+        match prepare(&input)
             .windows(2)
             .fold((0, 0), |(ones, threes), chunk| match chunk[1] - chunk[0] {
                 1 => (ones + 1, threes),
@@ -24,8 +24,8 @@ impl Solution for Task {
         }
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
-        count(0, &prepare(input)[1..], &mut HashMap::new())
+    fn part2(&self, input: Self::Input) -> Self::Output {
+        count(0, &prepare(&input)[1..], &mut HashMap::new())
     }
 }
 
@@ -67,11 +67,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(35, Task.part1(&vec![16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]));
+        assert_eq!(35, Task.part1(vec![16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]));
 
         assert_eq!(
             220,
-            Task.part1(&vec![
+            Task.part1(vec![
                 28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, 19, 38, 39, 11, 1, 32, 25,
                 35, 8, 17, 7, 9, 4, 2, 34, 10, 3
             ])
@@ -80,11 +80,11 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        assert_eq!(8, Task.part2(&vec![16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]));
+        assert_eq!(8, Task.part2(vec![16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]));
 
         assert_eq!(
             19208,
-            Task.part2(&vec![
+            Task.part2(vec![
                 28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, 19, 38, 39, 11, 1, 32, 25,
                 35, 8, 17, 7, 9, 4, 2, 34, 10, 3
             ])

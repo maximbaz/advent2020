@@ -11,22 +11,22 @@ impl Solution for Task {
         (input.trim().lines().flat_map(str::parse).collect(), 25)
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         let (xmas, preamble) = input;
 
         xmas.windows(preamble + 1)
             .find(|w| {
-                !w[..*preamble]
+                !w[..preamble]
                     .iter()
                     .tuple_combinations()
-                    .any(|(a, b)| a + b == w[*preamble])
+                    .any(|(a, b)| a + b == w[preamble])
             })
-            .map(|w| w[*preamble])
+            .map(|w| w[preamble])
             .expect("no solution found")
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
-        let wrong = self.part1(input);
+    fn part2(&self, input: Self::Input) -> Self::Output {
+        let wrong = self.part1(input.clone());
         let (xmas, _) = input;
 
         (2..xmas.len())
@@ -45,7 +45,7 @@ mod tests {
     fn test_part1() {
         assert_eq!(
             127,
-            Task.part1(&(
+            Task.part1((
                 vec![
                     35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277,
                     309, 576
@@ -59,7 +59,7 @@ mod tests {
     fn test_part2() {
         assert_eq!(
             62,
-            Task.part2(&(
+            Task.part2((
                 vec![
                     35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277,
                     309, 576

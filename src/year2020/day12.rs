@@ -14,7 +14,7 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         match input
             .iter()
             .fold((0, 0, (0, 1)), |(i, j, waypoint), step| match *step {
@@ -31,7 +31,7 @@ impl Solution for Task {
         }
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         match input
             .iter()
             .fold((0, 0, (-1, 10)), |(i, j, waypoint), step| match *step {
@@ -67,7 +67,7 @@ mod tests {
     fn test_part1() {
         assert_eq!(
             25,
-            Task.part1(&vec![('F', 10), ('N', 3), ('F', 7), ('R', 90), ('F', 11)])
+            Task.part1(vec![('F', 10), ('N', 3), ('F', 7), ('R', 90), ('F', 11)])
         );
     }
 
@@ -75,7 +75,7 @@ mod tests {
     fn test_part2() {
         assert_eq!(
             286,
-            Task.part2(&vec![('F', 10), ('N', 3), ('F', 7), ('R', 90), ('F', 11)])
+            Task.part2(vec![('F', 10), ('N', 3), ('F', 7), ('R', 90), ('F', 11)])
         );
     }
 }

@@ -18,7 +18,7 @@ impl Solution for Task {
         )
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         let (depart, buses) = input;
 
         buses
@@ -30,7 +30,7 @@ impl Solution for Task {
             .unwrap()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         input
             .1
             .iter()
@@ -55,19 +55,16 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(295, Task.part1(&(939, vec![7, 13, 0, 0, 59, 0, 31, 19])));
+        assert_eq!(295, Task.part1((939, vec![7, 13, 0, 0, 59, 0, 31, 19])));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(
-            1068781,
-            Task.part2(&(939, vec![7, 13, 0, 0, 59, 0, 31, 19]))
-        );
-        assert_eq!(3417, Task.part2(&(939, vec![17, 0, 13, 19])));
-        assert_eq!(754018, Task.part2(&(939, vec![67, 7, 59, 61])));
-        assert_eq!(779210, Task.part2(&(939, vec![67, 0, 7, 59, 61])));
-        assert_eq!(1261476, Task.part2(&(939, vec![67, 7, 0, 59, 61])));
-        assert_eq!(1202161486, Task.part2(&(939, vec![1789, 37, 47, 1889])));
+        assert_eq!(1068781, Task.part2((939, vec![7, 13, 0, 0, 59, 0, 31, 19])));
+        assert_eq!(3417, Task.part2((939, vec![17, 0, 13, 19])));
+        assert_eq!(754018, Task.part2((939, vec![67, 7, 59, 61])));
+        assert_eq!(779210, Task.part2((939, vec![67, 0, 7, 59, 61])));
+        assert_eq!(1261476, Task.part2((939, vec![67, 7, 0, 59, 61])));
+        assert_eq!(1202161486, Task.part2((939, vec![1789, 37, 47, 1889])));
     }
 }

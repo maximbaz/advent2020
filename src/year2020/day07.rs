@@ -15,12 +15,12 @@ impl Solution for Task {
         input.trim().lines().map(parse).collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
-        input.keys().filter(|k| check(input, k)).count()
+    fn part1(&self, input: Self::Input) -> Self::Output {
+        input.keys().filter(|k| check(&input, k)).count()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
-        count(input, "shiny gold") - 1
+    fn part2(&self, input: Self::Input) -> Self::Output {
+        count(&input, "shiny gold") - 1
     }
 }
 
@@ -67,7 +67,7 @@ mod tests {
         assert_eq!(
             4,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -90,7 +90,7 @@ dotted black bags contain no other bags.
         assert_eq!(
             32,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -110,7 +110,7 @@ dotted black bags contain no other bags.
         assert_eq!(
             126,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 shiny gold bags contain 2 dark red bags.
 dark red bags contain 2 dark orange bags.

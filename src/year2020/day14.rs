@@ -44,7 +44,7 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         input
             .iter()
             .fold(HashMap::new(), |mut mem, block| {
@@ -57,7 +57,7 @@ impl Solution for Task {
             .sum()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         input
             .iter()
             .fold(HashMap::new(), |mut mem, block| {
@@ -111,7 +111,7 @@ mod tests {
         assert_eq!(
             165,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
 mem[8] = 11
@@ -129,7 +129,7 @@ mem[8] = 0
         assert_eq!(
             208,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 mask = 000000000000000000000000000000X1001X
 mem[42] = 100

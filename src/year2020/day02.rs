@@ -35,14 +35,14 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         input
             .iter()
             .filter(|p| (p.min..=p.max).contains(&p.password.matches(p.letter).count()))
             .count()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         input
             .iter()
             .filter(|p| {
@@ -63,7 +63,7 @@ mod tests {
         assert_eq!(
             2,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 1-3 a: abcde
 1-3 b: cdefg
@@ -80,7 +80,7 @@ mod tests {
         assert_eq!(
             1,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 1-3 a: abcde
 1-3 b: cdefg

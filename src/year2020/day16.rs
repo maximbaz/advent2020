@@ -27,7 +27,7 @@ impl Solution for Task {
         }
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         input
             .nearby
             .iter()
@@ -36,7 +36,7 @@ impl Solution for Task {
             .sum()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         let valid_tickets = input
             .nearby
             .iter()
@@ -117,7 +117,7 @@ mod tests {
         assert_eq!(
             71,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 class: 1-3 or 5-7
 row: 6-11 or 33-44

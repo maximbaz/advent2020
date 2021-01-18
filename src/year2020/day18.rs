@@ -16,16 +16,16 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         solve(input, false)
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         solve(input, true)
     }
 }
 
-fn solve(homework: &Vec<Vec<char>>, is_advanced: bool) -> i64 {
+fn solve(homework: Vec<Vec<char>>, is_advanced: bool) -> i64 {
     homework
         .iter()
         .filter_map(|chars| Parser { chars, is_advanced }.run())
@@ -140,35 +140,35 @@ mod tests {
     fn test_part1() {
         assert_eq!(
             71,
-            Task.part1(&Task.parse_input("1 + 2 * 3 + 4 * 5 + 6".to_string()))
+            Task.part1(Task.parse_input("1 + 2 * 3 + 4 * 5 + 6".to_string()))
         );
         assert_eq!(
             51,
-            Task.part1(&Task.parse_input("1 + (2 * 3) + (4 * (5 + 6))".to_string()))
+            Task.part1(Task.parse_input("1 + (2 * 3) + (4 * (5 + 6))".to_string()))
         );
         assert_eq!(
             26,
-            Task.part1(&Task.parse_input("2 * 3 + (4 * 5)".to_string()))
+            Task.part1(Task.parse_input("2 * 3 + (4 * 5)".to_string()))
         );
         assert_eq!(
             437,
-            Task.part1(&Task.parse_input("5 + (8 * 3 + 9 + 3 * 4 * 3)".to_string()))
+            Task.part1(Task.parse_input("5 + (8 * 3 + 9 + 3 * 4 * 3)".to_string()))
         );
         assert_eq!(
             12240,
-            Task.part1(&Task.parse_input("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))".to_string()))
+            Task.part1(Task.parse_input("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))".to_string()))
         );
         assert_eq!(
             13632,
             Task.part1(
-                &Task.parse_input("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2".to_string())
+                Task.parse_input("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2".to_string())
             )
         );
 
         assert_eq!(
             71 + 51 + 26 + 437 + 12240 + 13632,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 1 + 2 * 3 + 4 * 5 + 6
 1 + (2 * 3) + (4 * (5 + 6))
@@ -187,35 +187,35 @@ mod tests {
     fn test_part2() {
         assert_eq!(
             231,
-            Task.part2(&Task.parse_input("1 + 2 * 3 + 4 * 5 + 6".to_string()))
+            Task.part2(Task.parse_input("1 + 2 * 3 + 4 * 5 + 6".to_string()))
         );
         assert_eq!(
             51,
-            Task.part2(&Task.parse_input("1 + (2 * 3) + (4 * (5 + 6))".to_string()))
+            Task.part2(Task.parse_input("1 + (2 * 3) + (4 * (5 + 6))".to_string()))
         );
         assert_eq!(
             46,
-            Task.part2(&Task.parse_input("2 * 3 + (4 * 5)".to_string()))
+            Task.part2(Task.parse_input("2 * 3 + (4 * 5)".to_string()))
         );
         assert_eq!(
             1445,
-            Task.part2(&Task.parse_input("5 + (8 * 3 + 9 + 3 * 4 * 3)".to_string()))
+            Task.part2(Task.parse_input("5 + (8 * 3 + 9 + 3 * 4 * 3)".to_string()))
         );
         assert_eq!(
             669060,
-            Task.part2(&Task.parse_input("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))".to_string()))
+            Task.part2(Task.parse_input("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))".to_string()))
         );
         assert_eq!(
             23340,
             Task.part2(
-                &Task.parse_input("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2".to_string())
+                Task.parse_input("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2".to_string())
             )
         );
 
         assert_eq!(
             231 + 51 + 46 + 1445 + 669060 + 23340,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 1 + 2 * 3 + 4 * 5 + 6
 1 + (2 * 3) + (4 * (5 + 6))

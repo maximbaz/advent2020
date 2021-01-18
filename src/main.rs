@@ -12,15 +12,15 @@ pub trait Solution {
     type Output: Display;
 
     fn parse_input(&self, input: String) -> Self::Input;
-    fn part1(&self, input: &Self::Input) -> Self::Output;
-    fn part2(&self, input: &Self::Input) -> Self::Output;
+    fn part1(&self, input: Self::Input) -> Self::Output;
+    fn part2(&self, input: Self::Input) -> Self::Output;
 
     fn read_input(&self, year: u16, day: u8) -> String {
         fs::read_to_string(format!("input/{}/{:02}", year, day)).expect("Error reading the file")
     }
 
     fn solve(&self, year: u16, day: u8, part: u8) -> String {
-        let input = &self.parse_input(self.read_input(year, day));
+        let input = self.parse_input(self.read_input(year, day));
         if part == 1 {
             self.part1(input).to_string()
         } else {

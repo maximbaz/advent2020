@@ -15,11 +15,11 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         input.iter().map(|sets| union_all(sets).len()).sum()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         input.iter().map(|sets| intersection_all(sets).len()).sum()
     }
 }
@@ -45,7 +45,7 @@ mod tests {
         assert_eq!(
             11,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 abc
 
@@ -74,7 +74,7 @@ b
         assert_eq!(
             6,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 abc
 

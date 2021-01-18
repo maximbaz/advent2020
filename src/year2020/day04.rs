@@ -46,11 +46,11 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         input.iter().filter(|p| p.has_all_fields()).count()
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         input.iter().filter(|p| p.is_valid()).count()
     }
 }
@@ -153,7 +153,7 @@ mod tests {
         assert_eq!(
             2,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
@@ -180,7 +180,7 @@ iyr:2011 ecl:brn hgt:59in
         assert_eq!(
             0,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
@@ -203,7 +203,7 @@ pid:3556412378 byr:2007
         assert_eq!(
             4,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f

@@ -12,11 +12,11 @@ impl Solution for Task {
         input.trim().lines().map(to_id).collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         *input.iter().max().expect("no solution found")
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         let given = input.iter().cloned().collect::<HashSet<usize>>();
 
         *iproduct!(1..127, 0..=7)
@@ -48,7 +48,7 @@ mod tests {
         assert_eq!(
             820,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 BFFFBBFRRR
 FFFBBBFRRR

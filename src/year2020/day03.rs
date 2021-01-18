@@ -14,14 +14,14 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
-        solve(input, 3, 1)
+    fn part1(&self, input: Self::Input) -> Self::Output {
+        solve(&input, 3, 1)
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         vec![(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
             .iter()
-            .map(|(right, down)| solve(input, *right, *down))
+            .map(|(right, down)| solve(&input, *right, *down))
             .product()
     }
 }
@@ -44,7 +44,7 @@ mod tests {
         assert_eq!(
             7,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 ..##.......
 #...#...#..
@@ -69,7 +69,7 @@ mod tests {
         assert_eq!(
             336,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 ..##.......
 #...#...#..

@@ -18,7 +18,7 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         stabilize(input, |input, row, col| match input[row][col] {
             'L' if count_occupied(&get_adjacent(input, row, col)) == 0 => '#',
             '#' if count_occupied(&get_adjacent(input, row, col)) > 3 => 'L',
@@ -26,7 +26,7 @@ impl Solution for Task {
         })
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         stabilize(input, |input, row, col| match input[row][col] {
             'L' if count_occupied(&get_visible(input, row, col)) == 0 => '#',
             '#' if count_occupied(&get_visible(input, row, col)) > 4 => 'L',
@@ -35,7 +35,7 @@ impl Solution for Task {
     }
 }
 
-fn stabilize<F: Fn(&Grid, usize, usize) -> char>(input: &Grid, model: F) -> usize {
+fn stabilize<F: Fn(&Grid, usize, usize) -> char>(input: Grid, model: F) -> usize {
     let mut occupied = 0;
     let mut data = input.clone();
 
@@ -102,7 +102,7 @@ mod tests {
         assert_eq!(
             37,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 L.LL.LL.LL
 LLLLLLL.LL
@@ -127,7 +127,7 @@ L.LLLLL.LL
         assert_eq!(
             26,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 L.LL.LL.LL
 LLLLLLL.LL

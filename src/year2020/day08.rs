@@ -24,11 +24,11 @@ impl Solution for Task {
             .collect()
     }
 
-    fn part1(&self, input: &Self::Input) -> Self::Output {
+    fn part1(&self, input: Self::Input) -> Self::Output {
         solve(input).0
     }
 
-    fn part2(&self, input: &Self::Input) -> Self::Output {
+    fn part2(&self, input: Self::Input) -> Self::Output {
         (0..input.len())
             .map(|i| {
                 let mut swapped = input.clone();
@@ -37,7 +37,7 @@ impl Solution for Task {
                     ("nop", n) => ("jmp".to_string(), n),
                     (op, n) => (op.to_string(), n),
                 };
-                solve(&swapped)
+                solve(swapped)
             })
             .find(|(_, terminated)| *terminated)
             .expect("no solution found")
@@ -45,7 +45,7 @@ impl Solution for Task {
     }
 }
 
-fn solve(input: &Ops) -> (i32, bool) {
+fn solve(input: Ops) -> (i32, bool) {
     let mut visited = HashSet::new();
     let mut acc = 0;
     let mut addr = 0;
@@ -72,7 +72,7 @@ mod tests {
         assert_eq!(
             5,
             Task.part1(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 nop +0
 acc +1
@@ -95,7 +95,7 @@ acc +6
         assert_eq!(
             8,
             Task.part2(
-                &Task.parse_input(
+                Task.parse_input(
                     "
 nop +0
 acc +1
