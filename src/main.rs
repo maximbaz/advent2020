@@ -41,12 +41,9 @@ fn main() {
         .filter(|(y, (d, p))| {
             *y == year.unwrap_or(*y) && *d == day.unwrap_or(*d) && *p == part.unwrap_or(*p)
         })
-        .for_each(|(year, (day, part))| match solve(year, day, part) {
-            Some((answer, took)) => println!(
-                "{} day {:02} part {} => {:15} (took {}ms)",
-                year, day, part, answer, took,
-            ),
-            None => (),
+        .filter_map(|(y, (d, p))| solve(y, d, p).map(|(a, ms)| (y, d, p, a, ms)))
+        .for_each(|(y, d, p, a, ms)| {
+            println!("{} day {:02} part {} => {:15} (took {}ms)", y, d, p, a, ms)
         });
 }
 
