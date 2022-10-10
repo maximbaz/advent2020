@@ -6,6 +6,7 @@ use std::fs;
 use std::time::Instant;
 
 mod year2020;
+mod year2021;
 
 pub trait Solution {
     type Input;
@@ -35,7 +36,7 @@ fn main() {
     let day = args.get(2).map(|x| x.parse().expect("invalid number"));
     let part = args.get(3).map(|x| x.parse().expect("invalid number"));
 
-    (2015..=2020)
+    (2015..=2021)
         .cartesian_product((1..=25).cartesian_product(1..=2))
         .filter(|(y, (d, p))| {
             *y == year.unwrap_or(*y) && *d == day.unwrap_or(*d) && *p == part.unwrap_or(*p)
@@ -51,6 +52,10 @@ fn main() {
 
 fn solve(year: u16, day: u8, part: u8) -> Option<(String, u128)> {
     match year {
+        2021 => match day {
+            1 => Some(measure(|| year2021::day01::Task.solve(year, day, part))),
+            _ => None,
+        },
         2020 => match day {
             1 => Some(measure(|| year2020::day01::Task.solve(year, day, part))),
             2 => Some(measure(|| year2020::day02::Task.solve(year, day, part))),
