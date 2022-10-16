@@ -51,6 +51,7 @@ fn solve(year: u16, day: u8, part: u8) -> Option<(String, u128)> {
     match year {
         2021 => match day {
             1 => Some(measure(|| year2021::day01::Task.solve(year, day, part))),
+            2 => Some(measure(|| year2021::day02::Task.solve(year, day, part))),
             _ => None,
         },
         2020 => match day {
